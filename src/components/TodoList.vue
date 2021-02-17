@@ -16,6 +16,7 @@
       type="text"
       placeholder="add todo"
       :value="title"
+      :class="{ 'marg-top': openTodos.length }"
     />
     <h3>Completed tasks</h3>
     <div v-if="completedTodos.length">
@@ -87,3 +88,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.marg-top {
+  margin-top: 1rem;
+}
+</style>
