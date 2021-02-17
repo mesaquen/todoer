@@ -1,23 +1,54 @@
 <template>
   <Container id="app">
-    <h1>Sample</h1>
+    <h1>TODOer</h1>
+    <p>A simple Vue.js todo list</p>
+    <TodoList :todos="todos" @add-todo="onAddTodo" />
   </Container>
 </template>
 
 <script>
-import Container from "@/components/Container.vue";
+import Container from '@/components/Container.vue'
+import TodoList from '@/components/TodoList.vue'
+import { getTodos, setTodos } from '@/logic/TodoLogic'
 
 export default {
-  name: "App",
+  name: 'App',
+
+  data: () => ({
+    todos: [],
+  }),
+
+  mounted: function() {
+    this.fetchData()
+  },
+
+  methods: {
+    fetchData() {
+      const todos = getTodos()
+      this.todos = todos
+    },
+
+    updateTodos(todos) {
+      this.todos = todos
+      setTodos(todos)
+    },
+
+    onAddTodo(todo) {
+      const next = this.todos.concat(todo)
+      this.updateTodos(next)
+    },
+  },
+
   components: {
-    Container
-  }
-};
+    Container,
+    TodoList,
+  },
+}
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
