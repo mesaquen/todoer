@@ -6,6 +6,7 @@
       :todos="todos"
       @add-todo="onAddTodo"
       @toggle-item="handleToggle"
+      @delete-item="handleDelete"
     />
   </Container>
 </template>
@@ -52,6 +53,11 @@ export default {
           : item
       )
 
+      this.updateTodos(next)
+    },
+
+    handleDelete(id) {
+      const next = this.todos.filter(item => item.id !== id)
       this.updateTodos(next)
     },
   },

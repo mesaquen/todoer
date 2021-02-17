@@ -28,7 +28,7 @@
         :done="item.done"
       />
     </div>
-    <p v-else>You haven't competed any taks yet</p>
+    <p v-else>You haven't competed any tasks yet</p>
   </div>
 </template>
 
