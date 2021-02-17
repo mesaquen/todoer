@@ -1,6 +1,6 @@
 <template>
   <div class="list-item-container">
-    <input type="checkbox" :checked="done" />
+    <input type="checkbox" :checked="done" @change="toggleItem" />
     <label v-if="done || !editing" :class="{ done }">{{ title }}</label>
     <input v-else type="text" :value="title" />
   </div>
@@ -14,6 +14,11 @@ export default {
     title: String,
     done: Boolean,
     editing: Boolean,
+  },
+  methods: {
+    toggleItem() {
+      this.$emit('toggle-item', this.id)
+    },
   },
 }
 </script>

@@ -3,6 +3,7 @@
     <h3>Tasks</h3>
     <ListItem
       v-for="item in openTodos"
+      v-on="$listeners"
       :id="item.id"
       :key="item.id"
       :title="item.title"
@@ -20,6 +21,7 @@
     <div v-if="completedTodos.length">
       <ListItem
         v-for="item in completedTodos"
+        v-on="$listeners"
         :id="item.id"
         :key="item.id"
         :title="item.title"

@@ -2,7 +2,11 @@
   <Container id="app">
     <h1>TODOer</h1>
     <p>A simple Vue.js todo list</p>
-    <TodoList :todos="todos" @add-todo="onAddTodo" />
+    <TodoList
+      :todos="todos"
+      @add-todo="onAddTodo"
+      @toggle-item="handleToggle"
+    />
   </Container>
 </template>
 
@@ -35,6 +39,19 @@ export default {
 
     onAddTodo(todo) {
       const next = this.todos.concat(todo)
+      this.updateTodos(next)
+    },
+
+    handleToggle(id) {
+      const next = this.todos.map(item =>
+        item.id === id
+          ? {
+              ...item,
+              done: !item.done,
+            }
+          : item
+      )
+
       this.updateTodos(next)
     },
   },
