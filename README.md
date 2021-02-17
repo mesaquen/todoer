@@ -1,5 +1,5 @@
 # todoer
-
+This is a simple TODO app done in [Vue.js](https://vuejs.org).
 ## Project setup
 ```
 yarn install
@@ -19,6 +19,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
