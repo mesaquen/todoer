@@ -1,12 +1,20 @@
 <template>
   <div
     class="list-item-container"
-    @mouseenter="toggleDelete"
-    @mouseleave="toggleDelete"
+    @mouseenter="displayDelete"
+    @mouseleave="hideDelete"
   >
     <input type="checkbox" :checked="done" @change="toggleItem" />
-    <label v-if="done || !editing" :class="{ done }">{{ title }}</label>
-    <input v-else type="text" :value="title" />
+    <label v-if="done || !editing" :class="{ done }" @click="toggleEditing">{{
+      title
+    }}</label>
+    <input
+      v-else
+      type="text"
+      :value="editingTitle"
+      @blur="updateItem"
+      @input="handleChangeTitle"
+    />
     <button v-if="showDelete" class="delete" @click="handleDelete">x</button>
   </div>
 </template>
@@ -18,13 +26,25 @@ export default {
     id: String,
     title: String,
     done: Boolean,
-    editing: Boolean,
   },
 
   data: () => ({
     showDelete: false,
+    editing: false,
+    editingTitle: '',
   }),
   methods: {
+    toggleEditing() {
+      this.editingTitle = this.editing ? '' : this.title
+      this.editing = !this.editing
+    },
+
+    updateItem() {
+      const { id, done, editingTitle } = this
+      this.$emit('update-item', { id, done, title: editingTitle })
+      this.toggleEditing()
+    },
+
     toggleItem() {
       this.$emit('toggle-item', this.id)
     },
@@ -33,8 +53,16 @@ export default {
       this.$emit('delete-item', this.id)
     },
 
-    toggleDelete() {
-      this.showDelete = !this.showDelete
+    handleChangeTitle(event) {
+      this.editingTitle = event?.target?.value
+    },
+
+    displayDelete() {
+      this.showDelete = true
+    },
+
+    hideDelete() {
+      this.showDelete = false
     },
   },
 }

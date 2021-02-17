@@ -7,6 +7,7 @@
       @add-todo="onAddTodo"
       @toggle-item="handleToggle"
       @delete-item="handleDelete"
+      @update-item="handleUpdateItem"
     />
   </Container>
 </template>
@@ -58,6 +59,11 @@ export default {
 
     handleDelete(id) {
       const next = this.todos.filter(item => item.id !== id)
+      this.updateTodos(next)
+    },
+
+    handleUpdateItem(item) {
+      const next = this.todos.map(todo => (todo.id === item.id ? item : todo))
       this.updateTodos(next)
     },
   },
