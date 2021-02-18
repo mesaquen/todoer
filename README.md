@@ -1,5 +1,8 @@
 # todoer
 This is a simple TODO app done in [Vue.js](https://vuejs.org).
+
+## Live demo
+This application can be found at **https://mesaquen.github.io/todoer**
 ## Project setup
 ```
 yarn install
